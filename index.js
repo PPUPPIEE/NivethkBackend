@@ -1,21 +1,26 @@
+const express = require('express');
+const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const bodyParser = require('body-parser');
 
-/**
- * Created by Issarapong Poesua on 10/26/2017 AD.
- */
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
- var express = require("express");
- var app = express();
- 
- var port = process.env.PORT || 5000;
- 
- app.get("/", (req, res) => {
-     var responseObject = {
-         status: true,
-         data: { text: "hello" }
-     }
-     res.json(responseObject);
- });
- 
- app.listen(port, () => {
-    console.log("application is listening on:", port);
- });
+app.use(bodyParser.json());
+
+const getProvince = require('./route/getProvince')
+const postAddlocation = require('./route/postAddlocation')
+const search = require('./route/search');
+
+mongoose.connect("mongodb+srv://NewXI:NewXI@cluster0.xthd5.mongodb.net/where")
+.then(()=>console.log("DB connect Successful"))
+.catch((err)=>{console.log(err)});
+
+app.use("/api/province",getProvince)
+app.use("/api/addlocation",postAddlocation)
+app.use("/api/search",search)
+app.listen(5000,()=>{
+    console.log("Server is running on port 5000");
+})
