@@ -3,8 +3,23 @@ const router = require("express").Router();
 const location = require("../model/searchResult");
 
 router.post("/", async (req, res) => {
-  //Search name
+  //no input
   if (
+    req.body.name === "" &&
+    req.body.sector === "" &&
+    req.body.province === "" &&
+    req.body.type === ""
+  ) {
+    try {
+      const searchResult = await location.find();
+      res.status(200).json(searchResult);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  //Search name
+  else if (
     req.body.name != "" &&
     req.body.sector === "" &&
     req.body.province === "" &&
