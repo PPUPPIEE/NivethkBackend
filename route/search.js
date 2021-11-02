@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        { $match: { name: { $regex: req.body.name } } },
+        { $match: { name: { $regex: req.body.name, $options: "i" } } },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -45,7 +45,10 @@ router.post("/", async (req, res) => {
     try {
       const searchResult = await location.aggregate([
         {
-          $match: { name: { $regex: req.body.name }, sector: req.body.sector },
+          $match: {
+            name: { $regex: req.body.name, $options: "i" },
+            sector: req.body.sector,
+          },
         },
       ]);
       res.status(200).json(searchResult);
@@ -65,7 +68,7 @@ router.post("/", async (req, res) => {
       const searchResult = await location.aggregate([
         {
           $match: {
-            name: { $regex: req.body.name },
+            name: { $regex: req.body.name, $options: "i" },
             province: req.body.province,
           },
         },
@@ -85,7 +88,12 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        { $match: { name: { $regex: req.body.name }, type: req.body.type } },
+        {
+          $match: {
+            name: { $regex: req.body.name, $options: "i" },
+            type: req.body.type,
+          },
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -104,7 +112,7 @@ router.post("/", async (req, res) => {
       const searchResult = await location.aggregate([
         {
           $match: {
-            name: { $regex: req.body.name },
+            name: { $regex: req.body.name, $options: "i" },
             sector: req.body.sector,
             province: req.body.province,
           },
@@ -125,7 +133,12 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        { $match: { name: { $regex: req.body.name }, type: req.body.type } },
+        {
+          $match: {
+            name: { $regex: req.body.name, $options: "i" },
+            type: req.body.type,
+          },
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -193,7 +206,13 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        { $match: { sector: req.body.sector, province: req.body.province, type: req.body.type } },
+        {
+          $match: {
+            sector: req.body.sector,
+            province: req.body.province,
+            type: req.body.type,
+          },
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -243,7 +262,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        { $match: {type: req.body.type } },
+        { $match: { type: req.body.type } },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
