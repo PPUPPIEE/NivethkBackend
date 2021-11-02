@@ -19,7 +19,7 @@ mongoose.connect("mongodb+srv://NewXI:NewXI@cluster0.xthd5.mongodb.net/where")
 .then(()=>console.log("DB connect Successful"))
 .catch((err)=>{console.log(err)});
 
-app.use("/",getProvince)
+app.use("/api/province",getProvince)
 app.use("/api/addlocation",postAddlocation)
 app.use("/api/search",search)
 app.listen(port,()=>{

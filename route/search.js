@@ -219,6 +219,22 @@ router.post("/", async (req, res) => {
       res.status(500).json(err);
     }
   }
+  //Search type
+  else if (
+    req.body.name === "" &&
+    req.body.sector === "" &&
+    req.body.province === "" &&
+    req.body.type != ""
+  ) {
+    try {
+      const searchResult = await location.aggregate([
+        { $match: {type: req.body.type } },
+      ]);
+      res.status(200).json(searchResult);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 });
 
 module.exports = router;
