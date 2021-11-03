@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     req.body.type === ""
   ) {
     try {
-      const searchResult = await location.find();
+      const searchResult = await location.aggregate([{$project:{_id:0,__v:0}}])
       res.status(200).json(searchResult);
     } catch (err) {
       res.status(500).json(err);
@@ -27,7 +27,9 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        { $match: { name: { $regex: req.body.name, $options: "i" } } },
+        {$project:{_id:0,__v:0}},
+        { $match: { name: { $regex: req.body.name, $options: "i" } } }
+
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -44,12 +46,13 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
             sector: req.body.sector,
           },
-        },
+        }
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -66,6 +69,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
@@ -88,6 +92,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
@@ -110,6 +115,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
@@ -133,6 +139,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
@@ -155,6 +162,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         { $match: { sector: req.body.sector } },
       ]);
       res.status(200).json(searchResult);
@@ -172,6 +180,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         { $match: { sector: req.body.sector, province: req.body.province } },
       ]);
       res.status(200).json(searchResult);
@@ -189,6 +198,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         { $match: { sector: req.body.sector, type: req.body.type } },
       ]);
       res.status(200).json(searchResult);
@@ -206,6 +216,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         {
           $match: {
             sector: req.body.sector,
@@ -229,6 +240,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         { $match: { province: req.body.province } },
       ]);
       res.status(200).json(searchResult);
@@ -246,6 +258,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         { $match: { province: req.body.sector, type: req.body.type } },
       ]);
       res.status(200).json(searchResult);
@@ -262,6 +275,7 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
+        {$project:{_id:0,__v:0}},
         { $match: { type: req.body.type } },
       ]);
       res.status(200).json(searchResult);
