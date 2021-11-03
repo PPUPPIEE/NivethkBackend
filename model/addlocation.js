@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const AddlocationSchema = new mongoose.Schema({
+    
     name: { type: String },
     sector: { type: String },
     province: { type: String },
@@ -14,7 +15,9 @@ const AddlocationSchema = new mongoose.Schema({
     detail: { type: String },
     contact: { type: String },
     security: { type: String },
-    location: { type: String }
+    location: { type: String },
+    check: {type: Boolean,default:false}
+
 }, {
     timestamps: true
 }
