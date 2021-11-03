@@ -19,6 +19,12 @@ mongoose.connect("mongodb+srv://NewXI:NewXI@cluster0.xthd5.mongodb.net/where")
 .then(()=>console.log("DB connect Successful"))
 .catch((err)=>{console.log(err)});
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ next();
+});
+
 app.use("/api/province",getProvince)
 app.use("/api/addlocation",postAddlocation)
 app.use("/api/search",search)
