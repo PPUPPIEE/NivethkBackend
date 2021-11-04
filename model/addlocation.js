@@ -7,7 +7,7 @@ const AddlocationSchema = new mongoose.Schema({
     province: { type: String },
     district: { type: String },
     type: { type: String },
-    imageurl: { type: String },
+    imageurl: { type: Object },
     opentime: { type: String },
     closetime: { type: String },
     toilet: { type: Boolean },
