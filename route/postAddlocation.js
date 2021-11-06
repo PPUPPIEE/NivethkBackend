@@ -7,7 +7,7 @@ router.post("/", (req, res) => {
     const post = new addlocation({
         name: req.body.name,
         sector: req.body.sector,
-        province: req.body.provinece,
+        province: req.body.province,
         district: req.body.district,
         type: req.body.type,
         imageurl: req.body.imageurl,
