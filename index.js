@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 var port = process.env.PORT || 5000;
@@ -14,6 +13,7 @@ app.use(bodyParser.json());
 const getProvince = require('./route/getProvince')
 const postAddlocation = require('./route/postAddlocation')
 const search = require('./route/search');
+const firebase = require('./route/firebase')
 
 mongoose.connect("mongodb+srv://NewXI:NewXI@cluster0.xthd5.mongodb.net/where")
 .then(()=>console.log("DB connect Successful"))
@@ -24,6 +24,8 @@ app.use(cors());
 app.use("/api/province",getProvince)
 app.use("/api/addlocation",postAddlocation)
 app.use("/api/search",search)
+app.use("/api/firebase",firebase)
+
 app.listen(port,()=>{
     console.log("Server is running on port 5000");
 })
