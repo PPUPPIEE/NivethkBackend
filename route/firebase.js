@@ -29,7 +29,12 @@ router.post("/upload", Multer.single("file"), (req, res) => {
   });
 
   blobStream.on('finish' , ()=>{
-    res.status(200).send(`File Name : ${fileName}\nhttps://firebasestorage.googleapis.com/v0/b/where-cd188.appspot.com/o/${fileName}?alt=media`)
+    var url = `https://firebasestorage.googleapis.com/v0/b/where-cd188.appspot.com/o/${fileName}?alt=media`
+    var data = {
+      "name" : fileName,
+      "url" : url
+    }
+    res.status(200).send(data)
   })
 
   blobStream.end(req.file.buffer);
@@ -38,7 +43,7 @@ router.post("/upload", Multer.single("file"), (req, res) => {
 router.post("/delete", (req,res) =>{
   try{
     admin.storage().bucket().file(req.body.name).delete();
-    res.status(500).send(`Delete ${req.body.name} complete`)
+    res.status(200).send(`Delete ${req.body.name} complete`)
   } catch (err){
     res.status(405).send("หาไฟล์ไม่เจอหรือชื่่อไฟล์ผิด")
   }
