@@ -13,8 +13,10 @@ router.post("/", (req, res) => {
         imageurl: req.body.imageurl,
         opentime: req.body.opentime,
         closetime: req.body.closetime,
-        toilet: req.body.toilet,
-        parking: req.body.parking,
+        facility :{
+            toilet: req.body.toilet,
+            parking: req.body.parking
+        },
         detail: req.body.detail,
         contact: req.body.contact,
         security: req.body.security,
