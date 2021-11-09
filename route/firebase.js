@@ -30,11 +30,7 @@ router.post("/upload", Multer.single("file"), (req, res) => {
 
   blobStream.on('finish' , ()=>{
     var url = `https://firebasestorage.googleapis.com/v0/b/where-cd188.appspot.com/o/${fileName}?alt=media`
-    var data = {
-      "name" : fileName,
-      "url" : url
-    }
-    res.status(200).send(data)
+    res.status(200).send(url)
   })
 
   blobStream.end(req.file.buffer);
