@@ -14,6 +14,7 @@ const getProvince = require('./route/getProvince')
 const postAddlocation = require('./route/postAddlocation')
 const search = require('./route/search');
 const firebase = require('./route/firebase')
+const patchStatus = require('./route/patchStatus')
 
 mongoose.connect("mongodb+srv://NewXI:NewXI@cluster0.xthd5.mongodb.net/where")
 .then(()=>console.log("DB connect Successful"))
@@ -25,6 +26,7 @@ app.use("/api/province",getProvince)
 app.use("/api/addlocation",postAddlocation)
 app.use("/api/search",search)
 app.use("/api/firebase",firebase)
+app.use("/api/updatestatus",patchStatus)
 
 app.listen(port,()=>{
     console.log("Server is running on port 5000");
