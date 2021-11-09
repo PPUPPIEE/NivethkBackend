@@ -18,7 +18,8 @@ router.post("/", (req, res) => {
         detail: req.body.detail,
         contact: req.body.contact,
         security: req.body.security,
-        location: req.body.location
+        location: req.body.location,
+        check : false,
     });
     post.save()
         .then(data => {
