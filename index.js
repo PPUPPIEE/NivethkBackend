@@ -14,11 +14,11 @@ app.use(bodyParser.json());
 
 const getProvince = require('./route/getProvince')
 const postAddlocation = require('./route/postAddlocation')
-const search = require('./route/search');
+const search = require('./route/search')
 const firebase = require('./route/firebase')
 const patchStatus = require('./route/patchStatus')
 const deletelocation = require('./route/deletelocation')
-
+const showuncheck = require ('./route/showuncheck')
 mongoose.connect(process.env.DB_CONNECTION)
 .then(()=>console.log("DB connect Successful"))
 .catch((err)=>{console.log(err)});
@@ -31,7 +31,7 @@ app.use("/api/search",search)
 app.use("/api/firebase",firebase)
 app.use("/api/updatestatus",patchStatus)
 app.use("/api/deletelocation",deletelocation)
-
+app.use("/api/showuncheck",showuncheck)
 app.listen(port,()=>{
     console.log("Server is running on port 5000");
 })
