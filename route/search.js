@@ -175,7 +175,9 @@ router.post("/", async (req, res) => {
     try {
       const searchResult = await location.aggregate([
         { $project: { _id: 0, __v: 0 } },
-        { $match: { sector: req.body.sector }, check: true },
+        { $match: { sector: req.body.sector
+          ,check: true
+         }},
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
