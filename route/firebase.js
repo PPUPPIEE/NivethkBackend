@@ -14,7 +14,6 @@ const storage = firebaseApp.storage();
 const bucket = storage.bucket();
 
 router.post("/upload", Multer.single("file"), (req, res) => {
-  const folder = "test";
   const fileName = `img_${Date.now()}`;
   const fileUpload = bucket.file(fileName);
   const blobStream = fileUpload.createWriteStream({
