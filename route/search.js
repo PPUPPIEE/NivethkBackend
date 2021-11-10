@@ -11,7 +11,10 @@ router.post("/", async (req, res) => {
     req.body.type === ""
   ) {
     try {
-      const searchResult = await location.aggregate([{$project:{_id:0,__v:0}}])
+      const searchResult = await location.aggregate([
+        { $project: { _id: 0, __v: 0 } },
+        { $match: { check: true } },
+      ]);
       res.status(200).json(searchResult);
     } catch (err) {
       res.status(500).json(err);
@@ -27,9 +30,13 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
-        { $match: { name: { $regex: req.body.name, $options: "i" } } }
-
+        { $project: { _id: 0, __v: 0 } },
+        {
+          $match: {
+            name: { $regex: req.body.name, $options: "i" },
+            check: true,
+          },
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -46,13 +53,14 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
+        { $project: { _id: 0, __v: 0 } },
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
             sector: req.body.sector,
+            check: true,
           },
-        }
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -69,11 +77,12 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
+        { $project: { _id: 0, __v: 0 } },
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
             province: req.body.province,
+            check: true,
           },
         },
       ]);
@@ -92,11 +101,12 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
+        { $project: { _id: 0, __v: 0 } },
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
             type: req.body.type,
+            check: true,
           },
         },
       ]);
@@ -115,12 +125,13 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
+        { $project: { _id: 0, __v: 0 } },
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
             sector: req.body.sector,
             province: req.body.province,
+            check: true,
           },
         },
       ]);
@@ -139,11 +150,12 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
+        { $project: { _id: 0, __v: 0 } },
         {
           $match: {
             name: { $regex: req.body.name, $options: "i" },
             type: req.body.type,
+            check: true,
           },
         },
       ]);
@@ -162,8 +174,8 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
-        { $match: { sector: req.body.sector } },
+        { $project: { _id: 0, __v: 0 } },
+        { $match: { sector: req.body.sector }, check: true },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -180,8 +192,14 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
-        { $match: { sector: req.body.sector, province: req.body.province } },
+        { $project: { _id: 0, __v: 0 } },
+        {
+          $match: {
+            sector: req.body.sector,
+            province: req.body.province,
+            check: true,
+          },
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -198,8 +216,10 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
-        { $match: { sector: req.body.sector, type: req.body.type } },
+        { $project: { _id: 0, __v: 0 } },
+        {
+          $match: { sector: req.body.sector, type: req.body.type, check: true },
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -216,12 +236,13 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
+        { $project: { _id: 0, __v: 0 } },
         {
           $match: {
             sector: req.body.sector,
             province: req.body.province,
             type: req.body.type,
+            check: true,
           },
         },
       ]);
@@ -240,8 +261,8 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
-        { $match: { province: req.body.province } },
+        { $project: { _id: 0, __v: 0 } },
+        { $match: { province: req.body.province, check: true } },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -258,8 +279,14 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
-        { $match: { province: req.body.sector, type: req.body.type } },
+        { $project: { _id: 0, __v: 0 } },
+        {
+          $match: {
+            province: req.body.sector,
+            type: req.body.type,
+            check: true,
+          },
+        },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {
@@ -275,8 +302,8 @@ router.post("/", async (req, res) => {
   ) {
     try {
       const searchResult = await location.aggregate([
-        {$project:{_id:0,__v:0}},
-        { $match: { type: req.body.type } },
+        { $project: { _id: 0, __v: 0 } },
+        { $match: { type: req.body.type, check: true } },
       ]);
       res.status(200).json(searchResult);
     } catch (err) {

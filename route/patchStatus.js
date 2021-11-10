@@ -5,8 +5,8 @@ const router = require("express").Router();
 router.patch("/", async (req, res) => {
     Status.updateOne({ name: req.body.name }, { $set: { check: req.body.check } })
         .exec()
-        .then(data => {
-            res.json({message:"เปลี่ยนสถานะแล้ว"})
+        .then( () => {
+            res.json({message:"เปลี่ยนสถานะแล้วเป็น "+req.body.check })
         })
         .catch(err => {
             res.json({ message: err })
