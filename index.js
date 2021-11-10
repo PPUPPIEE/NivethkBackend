@@ -19,6 +19,7 @@ const firebase = require('./route/firebase')
 const patchStatus = require('./route/patchStatus')
 const deletelocation = require('./route/deletelocation')
 const showuncheck = require ('./route/showuncheck')
+const getall = require('./route/getalllocation')
 mongoose.connect(process.env.DB_CONNECTION)
 .then(()=>console.log("DB connect Successful"))
 .catch((err)=>{console.log(err)});
@@ -32,6 +33,8 @@ app.use("/api/firebase",firebase)
 app.use("/api/updatestatus",patchStatus)
 app.use("/api/deletelocation",deletelocation)
 app.use("/api/showuncheck",showuncheck)
+app.use("/api/getall",getall)
+
 app.listen(port,()=>{
     console.log("Server is running on port 5000");
 })
