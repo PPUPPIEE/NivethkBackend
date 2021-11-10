@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv/config');
+
 var port = process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({
     extended: true
@@ -17,7 +19,7 @@ const firebase = require('./route/firebase')
 const patchStatus = require('./route/patchStatus')
 const deletelocation = require('./route/deletelocation')
 
-mongoose.connect("mongodb+srv://NewXI:NewXI@cluster0.xthd5.mongodb.net/where")
+mongoose.connect(process.env.DB_CONNECTION)
 .then(()=>console.log("DB connect Successful"))
 .catch((err)=>{console.log(err)});
 
